@@ -1,0 +1,158 @@
+		CISC 372  *  Fall 2019  *  Homework #1
+
+
+	   ==== ==== Prelude: Logging on cisc372 ==== ====
+
+If you have not already done so, apply for an EECIS account:
+https://accounts.eecis.udel.edu/register/
+
+Next, you must set up your computer so that you can use it as a
+terminal to log on to the course machine.
+
+Mac Users: install XCode command line tools, if you have not already
+done so. The exact method depends on which version of OS X you have.
+The directions at
+http://railsapps.github.io/xcode-command-line-tools.html should work
+for most of you. If you can't figure it out, ask us. Then, install
+XQuartz: https://www.xquartz.org
+
+Windows Users: download and configure PuTTY + Xming, following
+instructions here:
+    https://udeploy.udel.edu/software/putty-with-xming/
+and here:
+    http://www.udel.edu/it/research/training/config_laptop/puTTY.shtml
+The hostname for your saved session should be cisc372.cis.udel.edu.
+
+Linux Users: you shouldn't have to do anything.
+
+
+Next, you will log on to cisc372.cis.udel.edu. If you are doing this
+from off campus, you will have to first turn on the UD VPN (Cisco
+AnyConnect client: http://www.udel.edu/it/help/connecting/vpn/ ).
+
+For Mac and Linux users, open a Terminal and type the following:
+
+ssh -X USER@cisc372.cis.udel.edu
+
+where USER is your user name. Enter your EECIS password when prompted.
+
+For Windows users, use PuTTY as instructed.
+
+If you have logged on successfully, you should see a prompt in the
+interactive terminal (shell), which should look something like this:
+
+cisc372[31] [~/]> 
+
+Test it by typing the following at the prompt:
+
+pwd
+
+It should respond with the path to your home directory, which probably
+looks something like this:
+
+/usa/USER
+
+[note: it may be a different path for you; that's normal and fine.]
+
+
+
+    ==== ==== Problem 1: Creating/committing directories ==== ====
+
+
+1) Create a GitHub account if you dont have one. 
+
+2) Create a repository and name it your firstname_cisc372 in GitHub
+
+3) Keeping the repository private or public is your call in GitHub
+
+4) If you keep it private, you need to add TA's GitHub id to your repo and give him access
+
+5) Now you will see a "clone or download" option in Github. Pull that down and you will see https://github.com/sunitachandra/cisc372-F19.git" sunitachandra will be replaced with your GitHub username. Now go to your local system's terminal and do git clone https://github.com/<username>/cisc372-F19.git 
+
+5) Now in your local terminal you have created a Git enabled folder that will say firstname_cisc372
+
+6) Copy the hw1.txt from canvas into your folder  
+
+7) git add hw1 (this will automatically add the hw1.txt under this folder) 
+
+8) git commit -m "adding hw1 folder and file"
+
+9) git push 
+
+By doing this you have added a hw1 folder and its file into your Github repository 
+
+10) Now by using your favorite editor, create a file firstname_hello.c inside hw1. You can use vi or emacs or nano or another editor. This file should be a simple C program that prints "Hello from XXX!"
+10 times, where XXX is your name.   Save the file.
+
+11) Compile irstname_hello.c (cc -o firstname_hello firstname_hello.c)
+
+9. Execute it (./firstname_hello) and make sure it works. If there are problems,
+   edit, compile, execute and repeat until it works.
+
+10. Exit your editor (vi or emacs or nano).
+
+11. Add firstname_hello.c to version control (git add firstname_hello.c).
+
+12. Change back into the root of your local copy (cd ..)
+
+13. Commit everything (git commit). Enter a meaningful log message (using git commit -m "") 
+when the editor window opens, save it, and exit the editor.
+
+Congrats! This last step has synchronized the local copy of your
+repository with the global copy stored on the server. All the files
+that have been added to version control have now been copied there,
+and they will be there forever! If your personal computer is lost,
+stolen, or corrupted, at least you know that all of the work that you
+committed is safe. In fact, it is best to commit EARLY and OFTEN.
+
+14.  Just to make absolutely sure, let's checkout a fresh copy
+of your repo.  First, move into your home directory (cd ~).
+Create a temporary directory called "tmp" (mkdir tmp).
+Change into tmp (cd tmp).    Check out a fresh copy of your
+personal repo:
+
+git clone https://github.com/<youruseid>/firstname_cisc372.git 
+(you can find this by logging into your GitHub account via the browser, locate your repository and you will find a clone or download green box on the right. Click on to that and you should see the clone command) 
+
+
+Now examine it:
+
+ls firstname_cisc372              	 	[You should see hw1]
+ls firstname_cisc372/hw1           		[You should see firstname_hello.c]
+cat firstname_cisc372/hw1/firstname_hello.c  	[You should see the contents of firstname_hello.c]
+
+Finally, move back to your home (cd ~) and remove tmp and all of its
+contents, recursively (rm -rf tmp).
+
+Note: this last command using the option "-rf" is VERY POWERFUL and
+also DANGEROUS. It deletes everything in a directory and if you are
+not careful, you could wipe out your entire home directory.
+
+
+	  ==== ==== Problem 2: Add some automation ==== ====
+
+1. Move back in your hw1 directory.
+
+2. Create a Makefile with the following rules:
+
+   run : this executes firstname_hello.  Of course, if firstname_hello needs to be (re-)compiled,
+         it will do that
+
+   myhi : this compiles firstname_hello.c to create the executable myhi (unless
+          there is no need to re-compile it)
+
+   clean : this deletes any generated files, which in this case means
+           myhi and any file with a name ending in ~.  These latter
+	   files are emacs backup files.   The command to delete all
+	   files of this form is "rm -f firstname_hello *~".
+
+3. Test your Makefile: Try typing "make run" from the command line,
+and see what happens. Ditto with "make firstname_hello" and "make clean". If you
+type "make firstname_hello" twice in a row, what happens? Also, try typing "make
+firstname_hello", then edit the file in some trivial way (e.g., add another word
+to the message being printed), then type "make firstname_hello" again. Note what
+happens.
+
+4. Add your Makefile to version control and commit it, with a
+meaningful message. That is all you have to do for this problem.
+
