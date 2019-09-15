@@ -1,6 +1,8 @@
 // sasha_hello.c
 // Sept 9th, 2019
+// Function: Prints hello from Sasha 10 times.
 #include<stdio.h>
+
 
 int main() {
 
